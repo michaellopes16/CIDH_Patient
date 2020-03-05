@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.withInfo=exports.storiesOf=undefined;var _reactNative=require("@storybook/react-native");var withInfo=function withInfo(){return function(component){return component;};};exports.storiesOf=_reactNative.storiesOf;exports.withInfo=withInfo;
