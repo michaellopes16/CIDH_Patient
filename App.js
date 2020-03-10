@@ -7,46 +7,42 @@
  */
 
 import React, { Component } from 'react';
-import { Avatar, Image } from 'react-native-elements';
-import { Bubble } from 'nachos-ui';
+import {Image } from 'react-native-elements';
+// import { Button } from 'nachos-ui';
 //import ToggleSwitch from 'toggle-switch-react-native'
 import { 
   StyleSheet,
   View,
   ScrollView,
-  ImageBackground,
-  Text
+  ImageBackground
 
 } from 'react-native';
 
+import  CardMessage  from './componets/CardMessage'
+import { Container, Header, Content, Button, Text } from 'native-base';
+
+const images = [
+        {
+          id: "./img/BG1.png",
+          uri: require("./img/BG1.png")
+        },
+        {
+          id:  "./img/BG2.png",
+          uri: require("./img/BG2.png")
+        },
+        { 
+          id: "image_aviao",
+          uri: "https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        }
+      ];
 
 export default class App extends Component{
 
-  state = {
-    isOnLargeToggleSwitch: false,
-  };
-  onToggle(isOn) {
-    console.log("Changed to " + isOn);
-  }
-  
   render(){
     return (
-      <ImageBackground source={require("./img/background.png")} style={{width: '100%', height: '100%'}}>
-          <ScrollView style={styles.container}>
-          <View style={styles.view}>
-              <Image
-                  source={require("./img/P1.png")}
-                  style={styles.imgAvatar}
-                />
-            </View>
-            <View style={styles.postContainer}>
-                <Text style={styles.postTitle}>
-                  {`Olá! :) Eu sou o CIDH! \n\nEstou aqui para ajudar você e outras milhares de pessoas que sofrem com doenças crônicas.`}
-
-                </Text>
-            </View>
-          </ScrollView>
-        </ImageBackground>
+          <View style={styles.container}>
+             <CardMessage images={images}/>
+          </View>
     );
   }
 };
@@ -55,15 +51,20 @@ const styles = StyleSheet.create({
     container: {
       flex: 1
     },
-    bubbleStyle :{
-      margin: 10 
+    btn :{
+      margin: 10,
+      backgroundColor: "#FFF",
+      alignContent:"center",
+      textAlign: "center",
+      alignItems: "center" 
+    },
+    btnStyle : { 
+      margin: 15 
     },
     imgAvatar:{
       width: 200,
       height: 200,
-     
       alignContent: "center"
-
     },
     postContainer:{
       alignContent: 'center',
