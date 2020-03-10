@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 
 import  CardMessage  from './componets/CardMessage'
+import  MyCarousel  from './componets/MyCarousel'
 import { Container, Header, Content, Button, Text } from 'native-base';
 
 const images = [
@@ -30,9 +31,9 @@ const images = [
           id:  "./img/BG2.png",
           uri: require("./img/BG2.png")
         },
-        { 
-          id: "image_aviao",
-          uri: "https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        {
+          id:  "./img/BG3.png",
+          uri: require("./img/background.png")
         }
       ];
 
@@ -42,6 +43,7 @@ export default class App extends Component{
     return (
           <View style={styles.container}>
              <CardMessage images={images}/>
+             {/* <MyCarousel></MyCarousel> */}
           </View>
     );
   }

@@ -5,9 +5,11 @@ import {
     View,
     ScrollView,
     Dimensions,
+    ImageBackground,
     Image,
     Text
   } from 'react-native';
+import { Button } from 'native-base';
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 export default class CardMessage extends Component{
@@ -20,34 +22,57 @@ export default class CardMessage extends Component{
             selectedIndex:0
         };
     }
-    
+    setSelectedIndex = event =>{
+      // width of the viewSize
+      const viewSize = event.nativeEvent.layoutMeasurement.width;
+      //get current position of the scrallView
+      const contentOffset = event.nativeEvent.contentOffset.x;
+      const selectedIndex = Math.floor(contentOffset/viewSize);
+      this.setState({selectedIndex});
+    }    
     render(){
-
         const {images} = this.props;
         const {selectedIndex} = this.state;
-        // console.log(images)
-        return( 
-        <View style={{height:"100%", width:"100%"}}>
-            <ScrollView horizontal pagingEnabled>
-                {images.map(image =>(
-                    <Image 
-                      key={image.id}
-                      source={image.uri}
-                      style={styles.backgroundImage}
-                    />
-                ))}
-            </ScrollView>
-            <View style={styles.circleDiv}>
-              {images.map(( image, i) =>(
-                <View 
-                  key={image.id}
-                  style={styles.whiteCircle}
-                />
-              ))}    
-            </View>
-        </View>
-        );
-    }
+        console.log(images.length -1)
+        console.log(selectedIndex === images.length -1)
+        console.log(selectedIndex)
+        if(selectedIndex != images.length -1){
+              return( 
+              <View style={{height:"100%", width:"100%"}}>
+                  <ScrollView horizontal pagingEnabled onMomentumScrollEnd = {this.setSelectedIndex}>
+                      {images.map(image =>(
+                          <Image 
+                            key={image.id}
+                            source={image.uri}
+                            style={styles.backgroundImage}
+                          />
+                      ))}
+                  </ScrollView>
+                  <View style={styles.circleDiv}>
+                    {images.map(( image, i) =>(
+                      <View 
+                        key={image.id}
+                        style={[
+                          styles.whiteCircle, {opacity: i === selectedIndex ? 0.5 : 1}
+                        ]}
+                      />
+                    ))}    
+                  </View>
+              </View>
+              );
+         }else{
+          const {images} = this.props;
+           return(
+            <ImageBackground
+              source={require("../img/background.png")}
+              style={styles.backgroundImage}>
+              <View>
+                <Text>Botão</Text>
+              </View>
+            </ImageBackground>
+           );
+         }
+  }
 };
 const styles = StyleSheet.create({
     postTitle:{

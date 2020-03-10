@@ -18,6 +18,7 @@
     "react-native": "0.61.5",
     "react-native-anchor-carousel": "^3.1.2",
     "react-native-elements": "^1.2.7",
+    "react-native-snap-carousel": "^3.8.4",
     "react-native-vector-icons": "^6.6.0",
     "toggle-switch-react-native": "^2.1.0"
   },
