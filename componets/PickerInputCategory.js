@@ -4,21 +4,6 @@ import PickerInputPatology from './PickerInputPatology';
 import { 
     StyleSheet
   } from 'react-native';
-const diabetes = [
-    {
-      name: "Diabetes I",
-      key: "D1"
-    },
-    {
-      name: "Diabetes II",
-      key: "D2"
-    },
-    {
-      name: "Diabetes III",
-      key: "D3"
-    }
-  ];
-
   const patologies =[
     {
 
@@ -53,7 +38,7 @@ export default class PickerInputCategory extends Component {
     constructor(props) {
     super(props);
     this.state = {
-      selected2: undefined
+      selected2: "key5"
     };
   }
   onValueChange2(label) {
@@ -65,18 +50,7 @@ export default class PickerInputCategory extends Component {
 
 
   LoadPatologies(){
-   
-    patologies.map(val => {    
-      console.log("LoadPatologies: "+ val.diabetes.name);
-      switch(this.state.selected2){
-        case "key4":
-          val.diabetes.map(x => {
-            console.log(x.name); 
-            return <PickerInputPatology patology={x}></PickerInputPatology>;
-          });
-        }
 
-      });
   }
   render() {
     const {categorys} = this.props
@@ -102,9 +76,26 @@ export default class PickerInputCategory extends Component {
             <Item>
                 <Text style={styles.postTitle}>Qual dessas é a sua patologia?</Text>
             </Item>
-            <View>
-               {this.LoadPatologies()}
-            </View>
+            {
+                patologies.map(val => {    
+                  if(this.state.selected2 === "key0"){
+                    console.log("Patologies names: "+val.cardio[0].name);
+                    return <PickerInputPatology patology={val.cardio}></PickerInputPatology>; 
+                  }else if(this.state.selected2 === "key1"){
+                      console.log("Patologies names: "+ val.reumato[0].name);
+                    return <PickerInputPatology patology={val.reumato}></PickerInputPatology>; 
+                  }else if(this.state.selected2 === "key2"){
+                    console.log("Patologies names: "+ val.pscico[0].name);
+                    return <PickerInputPatology patology={val.pscico}></PickerInputPatology>; 
+                  }else if(this.state.selected2 === "key3"){
+                    console.log("Patologies names: "+ val.pulmonar[0].name);
+                    return <PickerInputPatology patology={val.pulmonar}></PickerInputPatology>; 
+                  }else if(this.state.selected2 === "key4"){
+                    console.log("Patologies names: "+ val.diabetes[0].name);
+                    return <PickerInputPatology patology={val.diabetes}></PickerInputPatology>; 
+                  }
+              })
+            } 
           </Form>
         </Content>
 

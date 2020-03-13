@@ -16,11 +16,11 @@ export default class PickerInputPatology extends Component {
   }
 
   render() {
-    const patology = this.props
-    //console.log("PATOLOGY: "+patology.name);
-    patology.map(x => {
-      console.log("No render do patology: "+x.name); 
-    });
+    const {patology} = this.props;
+    console.log("PATOLOGY: "+patology[0].name);
+    // patology.map(x => {
+    //   console.log("No render do patology: "+x.name); 
+    // });
     return (
           <Item picker rounded>
                 <Picker
@@ -38,7 +38,6 @@ export default class PickerInputPatology extends Component {
                     ))}                
                 </Picker>
           </Item>
-                
-                );
-            }
+          );
+      }
 }

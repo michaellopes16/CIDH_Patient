@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Item, Input } from 'native-base';
+import { Picker, Form, Content, Item, Input,Icon, Button, Text } from 'native-base';
 import { 
     StyleSheet,
     View,
     ScrollView,
     Dimensions,
     ImageBackground,
-    Image,
-    Text
+    Image
+
   } from 'react-native';
 import FormToCategory from './FormToCategory';
 import PickerInputCategory from './PickerInputCategory'
@@ -34,6 +34,10 @@ const categorys = [
     name: "Diabetes",
     key: "key4"
   },
+  {
+    name: "Escolha uma categoria",
+    key: "key5"
+  },
 ];
 const diabetes = [
   { name: "Diabetes tipo I",
@@ -50,10 +54,15 @@ export default class CardMessage extends Component{
         super(props);
 
         this.state={
-            selectedIndex:0
+            selectedIndex:0,
+            selected2: "key2"
         };
     }
-    
+    onValueChange2(value) {
+      this.setState({
+        selected2: value
+      });
+    }
     setSelectedIndex = event =>{
       // width of the viewSize
       const viewSize = event.nativeEvent.layoutMeasurement.width;
@@ -65,6 +74,7 @@ export default class CardMessage extends Component{
     render(){
         const {images} = this.props;
         const {selectedIndex} = this.state;
+        const {circles} = this.props;
         console.log(images.length -1)
         console.log(selectedIndex === images.length -1)
         console.log("selectedIndex: "+selectedIndex)
@@ -98,14 +108,67 @@ export default class CardMessage extends Component{
                      </ImageBackground>
                      <ImageBackground
                        source={require("../img/background.png")}
-                       style={styles.backgroundImage}>    
-                     
+                       style={styles.backgroundImage}>   
+                       <Image
+                          source={require('../img/P1.png')}
+                          style={styles.imgAvatar}
+                       >  
+                       </Image>   
+                        <Content style={styles.formContainer}>
+                          <Item>
+                            <Text style={styles.postTitle}>Agora me diga seu nome, sua idade e seu gênero!</Text>
+                          </Item>
+                          <Item rounded style={{padding:5, marginTop:5}}>
+                            <Input  placeholder='Seu nome'></Input>
+                          </Item>
+                          <Item rounded style={{padding:5, marginTop:5}}>
+                            <Input  placeholder='Sua idade'></Input>
+                          </Item>
+                          <Content  style={{padding:5, marginTop:5}}>
+                            <Form>
+                              <Text> Gênero </Text>
+                              <Item rounded picker>
+                                <Picker
+                                  mode="dropdown"
+                                  iosIcon={<Icon name="arrow-down" />}
+                                  style={{ width: undefined }}
+                                  placeholder="Select your SIM"
+                                  placeholderStyle={{ color: "#bfc6ea" }}
+                                  placeholderIconColor="#007aff"
+                                  selectedValue={this.state.selected2}
+                                  onValueChange={this.onValueChange2.bind(this)}
+                                >
+                                  <Picker.Item label="Masculino" value="key0" />
+                                  <Picker.Item label="Feminino" value="key1" />
+                                  <Picker.Item label="Outro" value="key2" />
+                                </Picker>
+                              </Item>
+                            </Form>
+                          </Content>
+                        </Content>
                      </ImageBackground>
+                     <ImageBackground
+                            source={require("../img/background.png")}
+                            style={styles.backgroundImage}> 
+                            <Image
+                                source={require('../img/P1.png')}
+                                style={styles.imgAvatar}
+                            >  
+                            </Image>        
+                            <Content style={styles.formContainer}>
+                               <Text style={styles.postTitle}>Tudo pronto :)</Text>
+                               <Text style={styles.postTitle}> Clique no botão abaixo e nos informe como está se sentindo hoje :)</Text>
+                               <Button style={styles.btn} bordered rounded>
+                                   <Text style={{fontSize:18}}>Iniciar</Text>
+                               </Button>
+                                  
+                              </Content>
+                          </ImageBackground>
                   </ScrollView>
                   <View style={styles.circleDiv}>
-                    {images.map(( image, i) =>(
+                    {circles.map(( circle, i) =>(
                       <View 
-                        key={image.id}
+                        key={circle.id}
                         style={[
                           styles.whiteCircle, {opacity: i === selectedIndex ? 0.5 : 1}
                         ]}
@@ -114,29 +177,6 @@ export default class CardMessage extends Component{
                   </View>
               </View>
               );
-        //  }else{
-        //   const {images} = this.props;
-        //   //this.setState({selectedIndex:selectedIndex-1});
-        //    return (         
-        //    <View style={{height:"100%", width:"100%", flex: 1}} >
-        //         <ImageBackground
-        //             source={require("../img/background.png")}
-        //             style={styles.backgroundImage}>
-
-        //        </ImageBackground>
-        //     <View style={styles.circleDiv}>
-        //           {images.map(( image, i) =>(
-        //             <View 
-        //             key={image.id}
-        //             style={[
-        //               styles.whiteCircle, {opacity: i === selectedIndex ? 0.5 : 1}
-        //             ]}
-        //             />
-        //             ))}    
-        //       </View>    
-        //     </View>
-        //     );
-        //  }
   }
 };
 const styles = StyleSheet.create({
@@ -189,5 +229,12 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         height: "100%",
         width:DEVICE_WIDTH
+      },
+      btn:{
+        alignContent: "center",
+        alignItems:"center",
+        justifyContent:"center",
+        height:50,
+        marginTop:50
       }
 });

@@ -24,26 +24,27 @@ import { Container, Header, Content, Button, Text } from 'native-base';
 
 const images = [
         {
-          id: "./img/BG1.png",
+          id: "BG1",
           uri: require("./img/BG1.png")
         },
         {
-          id:  "./img/BG2.png",
+          id:  "BG2",
           uri: require("./img/BG2.png")
         }
-        // ,
-        // {
-        //   id:  "./img/BG3.png",
-        //   uri: require("./img/background.png")
-        // }
       ];
-
+const circles = [
+        {id: "c0" },
+        {id: "c1" },
+        {id: "c2" },
+        {id: "c3" },
+        {id: "c4" },
+      ];
 export default class App extends Component{
 
   render(){
     return (
           <View style={styles.container}>
-             <CardMessage images={images}/>
+             <CardMessage images={images} circles={circles}/>
           </View>
     );
   }
