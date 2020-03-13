@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 
 import  CardMessage  from './componets/CardMessage'
-import  MyCarousel  from './componets/MyCarousel'
+// import  MyCarousel  from './componets/MyCarousel'
 import { Container, Header, Content, Button, Text } from 'native-base';
 
 const images = [
@@ -30,11 +30,12 @@ const images = [
         {
           id:  "./img/BG2.png",
           uri: require("./img/BG2.png")
-        },
-        {
-          id:  "./img/BG3.png",
-          uri: require("./img/background.png")
         }
+        // ,
+        // {
+        //   id:  "./img/BG3.png",
+        //   uri: require("./img/background.png")
+        // }
       ];
 
 export default class App extends Component{
@@ -43,7 +44,6 @@ export default class App extends Component{
     return (
           <View style={styles.container}>
              <CardMessage images={images}/>
-             {/* <MyCarousel></MyCarousel> */}
           </View>
     );
   }
